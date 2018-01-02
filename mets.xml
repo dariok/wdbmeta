@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mets:mets xmlns:mets="http://www.loc.gov/METS/"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.loc.gov/METS/ http://diglib.hab.de/rules/schema/mets/v1.9/wdb-mets-2.xsd">
+	<mets:structMap>
+		<mets:div></mets:div>
+	</mets:structMap>
+</mets:mets>
