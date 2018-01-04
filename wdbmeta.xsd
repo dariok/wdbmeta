@@ -183,6 +183,7 @@
 					</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
+			<xs:attribute name="date" type="xs:dateTimeStamp" use="required" />
 			<xs:attribute name="mime">
 				<xs:annotation>
 					<xs:documentation>
