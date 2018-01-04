@@ -157,8 +157,8 @@
 		</xs:annotation>
 		<xs:complexType>
 			<xs:choice>
-				<xs:element ref="wdbmeta:file" minOccurs="1" />
-				<xs:element ref="wdbmeta:filegroup" minOccurs="1" />
+				<xs:element ref="wdbmeta:file" maxOccurs="unbounded" minOccurs="1" />
+				<xs:element ref="wdbmeta:filegroup" maxOccurs="unbounded" minOccurs="1" />
 			</xs:choice>
 		</xs:complexType>
 	</xs:element>
