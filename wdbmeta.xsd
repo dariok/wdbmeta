@@ -183,7 +183,13 @@
 					</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="date" type="xs:dateTimeStamp" use="required" />
+			<xs:attribute name="date" type="xs:dateTimeStamp" use="required">
+				<xs:annotation>
+					<xs:documentation>
+						Contains the timestamp of when the file was last modified.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 			<xs:attribute name="mime">
 				<xs:annotation>
 					<xs:documentation>
