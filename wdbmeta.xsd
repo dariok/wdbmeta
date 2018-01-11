@@ -7,6 +7,7 @@
 	<xs:element name="projectMD">
 		<xs:complexType>
 			<xs:sequence>
+				<xs:element minOccurs="1" maxOccurs="1" ref="wdbmeta:projectID" />
 				<xs:element maxOccurs="1" ref="wdbmeta:titleData" />
 				<xs:element maxOccurs="1" ref="wdbmeta:files" />
 				<xs:element minOccurs="1" ref="wdbmeta:process" />
@@ -48,6 +49,7 @@
 			</xs:simpleContent>
 		</xs:complexType>
 	</xs:element>
+	<xs:element name="projectID" type="xs:ID" />
 	<xs:element name="person">
 		<xs:annotation>
 			<xs:documentation>
