@@ -10,6 +10,7 @@
 				<xs:element name="titleData" maxOccurs="1" type="wdbmeta:titleDataType"/>
 				<xs:element name="files" type="wdbmeta:filesDataType" />
 				<xs:element minOccurs="1" type="wdbmeta:processDataType" name="process" />
+				<xs:element minOccurs="1" type="wdbmeta:structureType" name="struct"	/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -191,5 +192,57 @@
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
+	</xs:complexType>
+
+	<!-- structures -->
+	<xs:complexType name="structureType">
+		<xs:annotation>
+			<xs:documentation>
+				Contains a definition about how views to the files are ordered, the closest analogy being a table of
+				contents. May contains any combination of either a view (which point to processes) or other struct.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:choice minOccurs="1" maxOccurs="unbounded">
+			<xs:element name="struct" type="wdbmeta:structureType" />
+			<xs:element name="view">
+				<xs:annotation>
+					<xs:documentation>
+						Represents a link to a process for one single file
+					</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attribute name="file" type="xs:IDREF" use="required">
+						<xs:annotation>
+							<xs:documentation>
+								Contains the reference to the ID of one file defined in this file.
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="target" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>
+								References one process/@target as defined in this file. If none is specified, the
+								implementation should use the first process defined in this file by document order.
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="label" type="xs:string" use="required">
+						<xs:annotation>
+							<xs:documentation>
+								Contains a string representing this view within the "table of contents".
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="order" type="xs:integer">
+						<xs:annotation>
+							<xs:documentation>
+								Optionally defines a value by which entries are to be ordered if they are not to be
+								returned in document order.
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
 	</xs:complexType>
 </xs:schema>
