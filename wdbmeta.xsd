@@ -3,6 +3,8 @@
 	targetNamespace="https://github.com/dariok/wdbplus/wdbmeta"
 	xmlns:wdbmeta="https://github.com/dariok/wdbplus/wdbmeta" elementFormDefault="qualified" vc:minVersion="1.1">
 	
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+	
 	<xs:element name="projectMD">
 		<xs:complexType>
 			<xs:sequence>
@@ -160,6 +162,14 @@
 		<xs:attribute name="uuid" type="xs:string" use="required">
 			<xs:annotation>
 				<xs:documentation> Contains the UUID v3 generated for the file. </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute ref="xml:id" use="required">
+			<xs:annotation>
+				<xs:documentation>
+					The ID under which this file entry is referenced in this file. If a global ID is defined in the
+					target file, these two values should be identical to avoid confusion.
+				</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 		
