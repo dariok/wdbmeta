@@ -2,17 +2,17 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
 	targetNamespace="https://github.com/dariok/wdbplus/wdbmeta"
 	xmlns:wdbmeta="https://github.com/dariok/wdbplus/wdbmeta" elementFormDefault="qualified" vc:minVersion="1.1">
-	
+
 	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd"/>
-	
+
 	<xs:element name="projectMD">
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="projectID" type="xs:ID"/>
 				<xs:element name="titleData" maxOccurs="1" type="wdbmeta:titleDataType"/>
-				<xs:element name="files" type="wdbmeta:filesDataType" />
-				<xs:element minOccurs="1" type="wdbmeta:processDataType" name="process" />
-				<xs:element minOccurs="1" type="wdbmeta:structureType" name="struct"	/>
+				<xs:element name="files" type="wdbmeta:filesDataType"/>
+				<xs:element minOccurs="1" type="wdbmeta:processDataType" name="process"/>
+				<xs:element minOccurs="1" type="wdbmeta:structureType" name="struct"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -114,9 +114,7 @@
 								</xs:annotation>
 							</xs:attribute>
 							<xs:assert
-								test="
-									(@refs and not(@regex)) or (@regex and not(@refs) or
-									(not(@refs or @regex) and not(following-sibling::wdbmeta:command)))"
+								test="(@refs and not(@regex)) or (@regex and not(@refs) or (not(@refs or @regex) and not(following-sibling::wdbmeta:command)))"
 							/>
 						</xs:extension>
 					</xs:simpleContent>
@@ -139,7 +137,7 @@
 				process/command/@group). </xs:documentation>
 		</xs:annotation>
 		<xs:choice>
-			<xs:element name="file" maxOccurs="unbounded" minOccurs="1" type="wdbmeta:fileType" />
+			<xs:element name="file" maxOccurs="unbounded" minOccurs="1" type="wdbmeta:fileType"/>
 			<xs:element name="filegroup" maxOccurs="unbounded" minOccurs="1">
 				<xs:annotation>
 					<xs:documentation> Groups together files within the project. </xs:documentation>
@@ -172,7 +170,6 @@
 				</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
-		
 		<xs:attribute name="path" type="xs:anyURI" use="required">
 			<xs:annotation>
 				<xs:documentation> Contains the (relative) path to the file </xs:documentation>
@@ -213,7 +210,7 @@
 			</xs:documentation>
 		</xs:annotation>
 		<xs:choice minOccurs="1" maxOccurs="unbounded">
-			<xs:element name="struct" type="wdbmeta:structureType" />
+			<xs:element name="struct" type="wdbmeta:structureType"/>
 			<xs:element name="view">
 				<xs:annotation>
 					<xs:documentation>
@@ -236,23 +233,28 @@
 							</xs:documentation>
 						</xs:annotation>
 					</xs:attribute>
-					<xs:attribute name="label" type="xs:string" use="required">
-						<xs:annotation>
-							<xs:documentation>
-								Contains a string representing this view within the "table of contents".
-							</xs:documentation>
-						</xs:annotation>
-					</xs:attribute>
-					<xs:attribute name="order" type="xs:integer">
-						<xs:annotation>
-							<xs:documentation>
-								Optionally defines a value by which entries are to be ordered if they are not to be
-								returned in document order.
-							</xs:documentation>
-						</xs:annotation>
-					</xs:attribute>
+					<xs:attributeGroup ref="wdbmeta:labellingGroup"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:choice>
+		<xs:attributeGroup ref="wdbmeta:labellingGroup"/>
 	</xs:complexType>
+
+	<xs:attributeGroup name="labellingGroup">
+		<xs:attribute name="label" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>
+					Contains a string representing this struct or view within the "table of contents".
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="order" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>
+					Optionally defines a value by which entries are to be ordered if they are not to be
+					returned in document order.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
 </xs:schema>
