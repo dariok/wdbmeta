@@ -256,5 +256,13 @@
 				</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
+		<xs:attribute name="private" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>
+					Optionally sets the structure or view to be private. How this is treated is up to the
+					implementing software.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:attributeGroup>
 </xs:schema>
