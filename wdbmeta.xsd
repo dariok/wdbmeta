@@ -148,6 +148,15 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="ptr" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Points to another metadata file that describes a subproject</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attributeGroup ref="wdbmeta:pathGroup" />
+					<xs:attributeGroup ref="wdbmeta:idGroup" />
+				</xs:complexType>
+			</xs:element>
 		</xs:choice>
 	</xs:complexType>
 
@@ -162,19 +171,8 @@
 				<xs:documentation> Contains the UUID v3 generated for the file. </xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
-		<xs:attribute ref="xml:id" use="required">
-			<xs:annotation>
-				<xs:documentation>
-					The ID under which this file entry is referenced in this file. If a global ID is defined in the
-					target file, these two values should be identical to avoid confusion.
-				</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-		<xs:attribute name="path" type="xs:anyURI" use="required">
-			<xs:annotation>
-				<xs:documentation> Contains the (relative) path to the file </xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
+		<xs:attributeGroup ref="wdbmeta:idGroup" />
+		<xs:attributeGroup ref="wdbmeta:pathGroup" />
 		<xs:attribute name="date" type="xs:dateTimeStamp" use="required">
 			<xs:annotation>
 				<xs:documentation> Contains the timestamp of when the file was last modified. </xs:documentation>
@@ -209,7 +207,7 @@
 				contents. May contains any combination of either a view (which point to processes) or other struct.
 			</xs:documentation>
 		</xs:annotation>
-		<xs:choice minOccurs="1" maxOccurs="unbounded">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
 			<xs:element name="struct" type="wdbmeta:structureType"/>
 			<xs:element name="view">
 				<xs:annotation>
@@ -218,13 +216,7 @@
 					</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
-					<xs:attribute name="file" type="xs:IDREF" use="required">
-						<xs:annotation>
-							<xs:documentation>
-								Contains the reference to the ID of one file defined in this file.
-							</xs:documentation>
-						</xs:annotation>
-					</xs:attribute>
+					<xs:attributeGroup ref="wdbmeta:fileGroup"/>
 					<xs:attribute name="target" type="xs:string">
 						<xs:annotation>
 							<xs:documentation>
@@ -236,8 +228,26 @@
 					<xs:attributeGroup ref="wdbmeta:labellingGroup"/>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="import">
+				<xs:annotation>
+					<xs:documentation>
+						Points to a parent to which this file describes a subproject
+					</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attributeGroup ref="wdbmeta:pathGroup"/>
+				</xs:complexType>
+			</xs:element>
 		</xs:choice>
-		<xs:attributeGroup ref="wdbmeta:labellingGroup"/>
+		<xs:attributeGroup ref="wdbmeta:labellingGroup" />
+		<xs:attribute name="file" type="xs:IDREF">
+			<xs:annotation>
+				<xs:documentation>
+					Contains the reference to the ID of one file defined in this file.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:assert test="not(@file and *)"/>
 	</xs:complexType>
 
 	<xs:attributeGroup name="labellingGroup">
@@ -261,6 +271,35 @@
 				<xs:documentation>
 					Optionally sets the structure or view to be private. How this is treated is up to the
 					implementing software.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+
+	<xs:attributeGroup name="fileGroup">
+		<xs:attribute name="file" type="xs:IDREF" use="required">
+			<xs:annotation>
+				<xs:documentation>
+					Contains the reference to the ID of one file defined in this file.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	
+	<xs:attributeGroup name="pathGroup">
+		<xs:attribute name="path" type="xs:anyURI" use="required">
+			<xs:annotation>
+				<xs:documentation> Contains the (relative) path to the file </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	
+	<xs:attributeGroup name="idGroup">
+		<xs:attribute ref="xml:id" use="required">
+			<xs:annotation>
+				<xs:documentation>
+					the id under which this file entry is referenced in this file. if a global id is defined in the
+					target file, these two values should be identical to avoid confusion.
 				</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
