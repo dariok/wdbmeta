@@ -15,6 +15,14 @@
 				<xs:element minOccurs="1" type="wdbmeta:processDataType" name="process"/>
 				<xs:element minOccurs="1" type="wdbmeta:structureType" name="struct"/>
 			</xs:sequence>
+			<xs:attribute ref="xml:id" use="required">
+				<xs:annotation>
+					<xs:documentation>
+						A unique ID for this (sub-)project. While it is not required and may be necessary for certain
+						setups, its value SHOULD correspond to the projectID element.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 
