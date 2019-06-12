@@ -301,7 +301,7 @@
 	<xs:complexType name="fileType">
 		<xs:annotation>
 			<xs:documentation>
-				Groups together relevant metadate about one single file contained within the project.
+				Groups together relevant metadata about one single file contained within the project.
 			</xs:documentation>
 		</xs:annotation>
 		<xs:attribute name="uuid" type="xs:string" use="required">
