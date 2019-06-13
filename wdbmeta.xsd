@@ -388,7 +388,7 @@
 		<xs:attribute name="file" type="xs:IDREF">
 			<xs:annotation>
 				<xs:documentation>
-					Contains the reference to the ID of one file defined in this file.
+					Contains the reference to the ID of one file element defined in this wdbmeta file.
 				</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
