@@ -284,6 +284,13 @@
 					<xs:sequence>
 						<xs:element name="file" minOccurs="1" type="wdbmeta:fileType"/>
 					</xs:sequence>
+					<xs:attribute ref="xml:id">
+						<xs:annotation>
+							<xs:documentation>
+								A unique ID to identify this filegroup, e.g. in a command element.
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="ptr" maxOccurs="unbounded">
