@@ -316,9 +316,16 @@
 				<xs:documentation> Contains the UUID v3 generated for the file. </xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
+		<xs:attribute name="pid" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					Contains an externally defined persistent identifier for this resource.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 		<xs:attributeGroup ref="wdbmeta:idGroup" />
 		<xs:attributeGroup ref="wdbmeta:pathGroup" />
-		<xs:attribute name="date" type="xs:dateTimeStamp" use="required">
+		<xs:attribute name="date" type="xs:dateTime" use="required">
 			<xs:annotation>
 				<xs:documentation> Contains the timestamp of when the file was last modified. </xs:documentation>
 			</xs:annotation>
@@ -349,7 +356,7 @@
 		<xs:annotation>
 			<xs:documentation>
 				Contains a definition about how views to the files are ordered, the closest analogy being a table of
-				contents. May contains any combination of either a view (which point to processes) or other struct.
+				contents. May contain any combination of either a view (which point to processes) or other struct.
 			</xs:documentation>
 		</xs:annotation>
 		<xs:choice minOccurs="0" maxOccurs="unbounded">
