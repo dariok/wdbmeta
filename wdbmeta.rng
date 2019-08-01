@@ -49,9 +49,7 @@
               and 'sub'. </a:documentation>
           </rng:data>
         </rng:attribute>
-        <rng:data type="string">
-          <rng:param name="pattern">(.|\n|\r)*\S(.|\n|\r)*</rng:param>
-        </rng:data>
+        <rng:ref name="nonEmptyString"/>
       </rng:element>
     </rng:oneOrMore>
     <rng:optional>
@@ -80,6 +78,7 @@
             </a:documentation>
           </rng:data>
         </rng:attribute>
+        <rng:ref name="nonEmptyString" />
       </rng:element>
     </rng:zeroOrMore>
     <rng:zeroOrMore>
@@ -423,5 +422,11 @@
       datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
       <rng:data type="ID"/>
     </rng:attribute>
+  </rng:define>
+  
+  <rng:define name="nonEmptyString">
+    <rng:data type="string">
+      <rng:param name="pattern">(.|\n|\r)*\S(.|\n|\r)*</rng:param>
+    </rng:data>
   </rng:define>
 </rng:grammar>
