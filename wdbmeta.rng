@@ -111,9 +111,8 @@
               <a:documentation> Contains the information for one type of content, such as “images”,
                 or “introductions”, etc. </a:documentation>
               <rng:element name="description">
-                <rng:data type="string">
-                  <a:documentation> Contains a free description of the content. </a:documentation>
-                </rng:data>
+                <a:documentation>Contains a free description of the content.</a:documentation>
+                <rng:ref name="nonEmptyString" />
               </rng:element>
               <rng:optional>
                 <rng:element name="external">
