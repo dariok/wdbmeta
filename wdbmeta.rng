@@ -29,12 +29,11 @@
       <rng:element name="struct">
         <rng:ref name="structureType"/>
       </rng:element>
-      <rng:attribute name="id" ns="http://www.w3.org/XML/1998/namespace">
+      <rng:ref name="idGroup">
         <a:documentation>A unique ID for this (sub-)project. While it is not required and may be
           necessary for certain setups, its value SHOULD correspond to the projectID
           element.</a:documentation>
-        <rng:text/>
-      </rng:attribute>
+      </rng:ref>
     </rng:element>
   </rng:define>
 
@@ -231,9 +230,7 @@
           <rng:element name="file">
             <rng:ref name="fileType"/>
           </rng:element>
-          <rng:attribute name="id" ns="http://www.w3.org/XML/1998/namespace">
-            <rng:text/>
-          </rng:attribute>
+          <rng:ref name="idGroup" />
         </rng:element>
       </rng:oneOrMore>
       <rng:oneOrMore>
@@ -353,9 +350,7 @@
   </rng:define>
 
   <rng:define name="involvementAttrGroup">
-    <rng:attribute name="id" ns="http://www.w3.org/XML/1998/namespace">
-      <rng:text/>
-    </rng:attribute>
+    <rng:ref name="idGroup" />
     <rng:optional>
       <rng:attribute name="contribution">
         <rng:data type="IDREFS">
