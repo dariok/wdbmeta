@@ -83,18 +83,16 @@
     </rng:zeroOrMore>
     <rng:zeroOrMore>
       <rng:element name="language">
-        <rng:data type="string">
-          <a:documentation> Information about the languages used in the source texts. Should conform
-            to RFC 5646. </a:documentation>
-        </rng:data>
+        <rng:ref name="nonEmptyString"/>
+        <a:documentation> Information about the languages used in the source texts. Should conform
+          to RFC 5646. </a:documentation>
       </rng:element>
     </rng:zeroOrMore>
     <rng:zeroOrMore>
       <rng:element name="type">
-        <rng:data type="string">
-          <a:documentation> Information about the type of the original resources edited in this
-            project </a:documentation>
-        </rng:data>
+        <a:documentation> Information about the type of the original resources edited in this
+          project </a:documentation>
+        <rng:ref name="nonEmptyString"/>
       </rng:element>
     </rng:zeroOrMore>
   </rng:define>
