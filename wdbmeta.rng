@@ -205,6 +205,7 @@
             </rng:attribute>
           </rng:choice>
         </rng:optional>
+        <rng:data type="anyURI"/>
       </rng:element>
     </rng:oneOrMore>
     <rng:attribute name="target">
