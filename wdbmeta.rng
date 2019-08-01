@@ -4,15 +4,15 @@
   xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
   ns="https://github.com/dariok/wdbplus/wdbmeta"
   datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
-  
+
   <rng:start combine="choice">
     <rng:ref name="projectMD"/>
   </rng:start>
-  
+
   <rng:define name="projectMD">
     <rng:element name="projectMD">
       <rng:element name="projectID">
-        <rng:text />
+        <rng:text/>
       </rng:element>
       <rng:element name="titleData">
         <rng:ref name="titleDataType"/>
@@ -37,19 +37,24 @@
       </rng:attribute>
     </rng:element>
   </rng:define>
-  
+
   <rng:define name="titleDataType">
     <a:documentation> Contains the most important metadata for this project. These might be used for
       cataloguing, citation etc. </a:documentation>
-    <rng:element name="title">
-      <a:documentation> Contains the title(s) of the project. </a:documentation>
-      <rng:attribute name="type">
+    <rng:oneOrMore>
+      <rng:element name="title">
+        <a:documentation> Contains the title(s) of the project. </a:documentation>
+        <rng:attribute name="type">
+          <rng:data type="string">
+            <a:documentation> May be used to give the type of the title. Suggested values are 'main'
+              and 'sub'. </a:documentation>
+          </rng:data>
+        </rng:attribute>
         <rng:data type="string">
-          <a:documentation> May be used to give the type of the title. Suggested values are 'main'
-            and 'sub'. </a:documentation>
+          <rng:param name="pattern">(.|\n|\r)*\S(.|\n|\r)*</rng:param>
         </rng:data>
-      </rng:attribute>
-    </rng:element>
+      </rng:element>
+    </rng:oneOrMore>
     <rng:optional>
       <rng:element name="involvement">
         <rng:ref name="involvementGroup"/>
@@ -95,7 +100,7 @@
       </rng:element>
     </rng:zeroOrMore>
   </rng:define>
-  
+
   <!-- project meta data -->
   <rng:define name="metaDataType">
     <a:documentation> The meta data section groups together all global meta data for the project
@@ -156,7 +161,7 @@
       </rng:oneOrMore>
     </rng:element>
   </rng:define>
-  
+
   <!-- "behaviours" -->
   <rng:define name="processDataType">
     <a:documentation> A process groups together commands which process the data within the edition.
@@ -205,7 +210,7 @@
       </rng:data>
     </rng:attribute>
   </rng:define>
-  
+
   <!-- files and grouping -->
   <rng:define name="filesDataType">
     <a:documentation> Contains a list of all files that belong to the project. These files may be
@@ -237,7 +242,7 @@
       </rng:oneOrMore>
     </rng:choice>
   </rng:define>
-  
+
   <rng:define name="fileType">
     <a:documentation> Groups together relevant metadata about one single file contained within the
       project. </a:documentation>
@@ -280,7 +285,7 @@
       </rng:attribute>
     </rng:optional>
   </rng:define>
-  
+
   <!-- structures -->
   <rng:define name="structureType">
     <a:documentation> Contains a definition about how views to the files are ordered, the closest
@@ -321,7 +326,7 @@
       </rng:attribute>
     </rng:optional>
   </rng:define>
-  
+
   <!-- people and organizations -->
   <rng:define name="involvementGroup">
     <a:documentation> Contains elements for those who can be involved in a project or the original
@@ -343,7 +348,7 @@
       </rng:choice>
     </rng:zeroOrMore>
   </rng:define>
-  
+
   <rng:define name="involvementAttrGroup">
     <rng:attribute name="id" ns="http://www.w3.org/XML/1998/namespace">
       <rng:text/>
@@ -372,7 +377,7 @@
       </rng:attribute>
     </rng:optional>
   </rng:define>
-  
+
   <rng:define name="labellingGroup">
     <rng:attribute name="label">
       <rng:data type="string">
@@ -397,7 +402,7 @@
       </rng:attribute>
     </rng:optional>
   </rng:define>
-  
+
   <rng:define name="fileGroup">
     <rng:attribute name="file">
       <rng:data type="IDREF">
@@ -406,7 +411,7 @@
       </rng:data>
     </rng:attribute>
   </rng:define>
-  
+
   <rng:define name="pathGroup">
     <rng:attribute name="path">
       <rng:data type="anyURI">
@@ -414,7 +419,7 @@
       </rng:data>
     </rng:attribute>
   </rng:define>
-  
+
   <rng:define name="idGroup">
     <rng:attribute name="id" ns="http://www.w3.org/XML/1998/namespace">
       <rng:text/>
