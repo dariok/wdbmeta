@@ -127,9 +127,7 @@
                   </rng:data>
                 </rng:element>
               </rng:optional>
-              <rng:attribute name="id" ns="http://www.w3.org/XML/1998/namespace">
-                <rng:text/>
-              </rng:attribute>
+              <rng:ref name="idGroup" />
             </rng:element>
           </rng:oneOrMore>
         </rng:choice>
@@ -258,9 +256,9 @@
     </rng:attribute>
     <rng:optional>
       <rng:attribute name="pid">
-        <rng:data type="string">
-          <a:documentation> Contains an externally defined persistent identifier for this resource.
-          </a:documentation>
+        <rng:data type="ID">
+          <a:documentation>Contains an externally defined persistent identifier for this
+            resource.</a:documentation>
         </rng:data>
       </rng:attribute>
     </rng:optional>
@@ -426,8 +424,9 @@
   </rng:define>
 
   <rng:define name="idGroup">
-    <rng:attribute name="id" ns="http://www.w3.org/XML/1998/namespace" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
-      <rng:data type="ID" />
+    <rng:attribute name="id" ns="http://www.w3.org/XML/1998/namespace"
+      datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+      <rng:data type="ID"/>
     </rng:attribute>
   </rng:define>
 </rng:grammar>
