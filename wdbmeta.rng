@@ -170,7 +170,7 @@
       one to be used for processing. </a:documentation>
     <rng:oneOrMore>
       <rng:element name="command">
-        <a:documentation> A command must at least containt a URI to identify the action to be taken
+        <a:documentation> A command must at least contain a URI to identify the action to be taken
           and information as to the type of action that is described. Whether a command matches is
           determined by evaluating @refs and @regex with respect to the ID supplied for processing
           or by matching @group to a group of entries within the same file. If neither @refs, @regex
@@ -182,25 +182,29 @@
               'ant'. </a:documentation>
           </rng:data>
         </rng:attribute>
-        <rng:attribute name="refs">
-          <rng:data type="string">
-            <a:documentation> Contains a whitespace separated sequence of ID values to be checked.
-              If a supplied ID exactly matches any of these values, this criterion matches as a
-              whole. </a:documentation>
-          </rng:data>
-        </rng:attribute>
-        <rng:attribute name="regex">
-          <rng:data type="string">
-            <a:documentation> Contains one regular expression against which a supplied ID value is
-              tested. </a:documentation>
-          </rng:data>
-        </rng:attribute>
-        <rng:attribute name="group">
-          <rng:data type="IDREFS">
-            <a:documentation> Points to one or more IDs of groups within the same file, e.g. defined
-              by a file/group/@id. </a:documentation>
-          </rng:data>
-        </rng:attribute>
+        <rng:optional>
+          <rng:choice>
+            <rng:attribute name="refs">
+              <rng:data type="string">
+                <a:documentation> Contains a whitespace separated sequence of ID values to be
+                  checked. If a supplied ID exactly matches any of these values, this criterion
+                  matches as a whole. </a:documentation>
+              </rng:data>
+            </rng:attribute>
+            <rng:attribute name="regex">
+              <rng:data type="string">
+                <a:documentation> Contains one regular expression against which a supplied ID value
+                  is tested. </a:documentation>
+              </rng:data>
+            </rng:attribute>
+            <rng:attribute name="group">
+              <rng:data type="IDREFS">
+                <a:documentation> Points to one or more IDs of groups within the same file, e.g.
+                  defined by a file/group/@id. </a:documentation>
+              </rng:data>
+            </rng:attribute>
+          </rng:choice>
+        </rng:optional>
       </rng:element>
     </rng:oneOrMore>
     <rng:attribute name="target">
