@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="wdbmeta.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<projectMD xmlns="https://github.com/dariok/wdbplus/wdbmeta" xml:id="Untitled">
+  <projectID></projectID>
+  <titleData>
+    <title type=""></title>
+    <date></date>
+  </titleData>
+  <metaData>
+    <contentGroup>
+      <content xml:id="">
+        <description></description>
+      </content>
+    </contentGroup>
+    <involvement></involvement>
+    <legal>
+      <licence content="" href=""></licence>
+    </legal>
+  </metaData>
+  <files></files>
+  <process target="">
+    <command type="" refs="" regex="" group=""></command>
+  </process>
+  <struct label=""></struct>
+</projectMD>
