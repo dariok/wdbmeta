@@ -18,8 +18,10 @@
     </legal>
   </metaData>
   <files></files>
-  <process target="">
-    <command type="" refs="" regex="" group=""></command>
+  <process target="preprocess"><!-- reicht ein process dafür aus? Sollte target ein kontrolliertes Vokabular haben oder zumindest Vorschläge? -->
+    <command type="xsl">
+      t.xsl
+    </command>
   </process>
   <struct label=""></struct>
 </projectMD>

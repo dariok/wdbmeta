@@ -163,12 +163,13 @@
       one to be used for processing. </a:documentation>
     <rng:oneOrMore>
       <rng:element name="command">
-        <a:documentation> A command must at least contain a URI to identify the action to be taken
-          and information as to the type of action that is described. Whether a command matches is
-          determined by evaluating @refs and @regex with respect to the ID supplied for processing
-          or by matching @group to a group of entries within the same file. If neither @refs, @regex
-          nor @group are present, the command will match anything and thus no following command will
-          ever be executed. </a:documentation>
+        <a:documentation>A command must contain either exactly one xs:anyURI to identify the action to be taken or a
+          sequence of `step` elements that each contain exactly one xs:anyURI. These steps are to be applied
+          sequentially and in document order. Each `command` also needs to contain information as to the type of action
+          that is described. Whether a command matches is determined by evaluating @refs and @regex with respect to the
+          ID supplied for processing or by matching @group to a group of entries within the same file. If neither @refs,
+          @regex nor @group are present, the command will match anything and thus no following command will ever be
+          executed.</a:documentation>
         <rng:attribute name="type">
           <rng:data type="string">
             <a:documentation> Gives the type of processing that is specified, e.g. 'xsl', 'xquery',
@@ -198,7 +199,16 @@
             </rng:attribute>
           </rng:choice>
         </rng:optional>
-        <rng:data type="anyURI"/>
+        <rng:choice>
+          <rng:data type="anyURI"/>
+          <rng:oneOrMore>
+            <rng:element name="step">
+              <rng:data type="anyURI" />
+              <a:documentation>If more than one step is required for processing, each step has to be given as xs:anyURI
+                in a `step` element of its own. These are applied in sequence.</a:documentation>
+            </rng:element>
+          </rng:oneOrMore>
+        </rng:choice>
       </rng:element>
     </rng:oneOrMore>
     <rng:attribute name="target">
