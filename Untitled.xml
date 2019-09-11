@@ -19,8 +19,16 @@
   </metaData>
   <files></files>
   <process target="preprocess"><!-- reicht ein process dafür aus? Sollte target ein kontrolliertes Vokabular haben oder zumindest Vorschläge? -->
-    <command type="xsl">
-      t.xsl
+    <command type="xsl" label="Preprocessing für Einleitungen">
+      <step>i1.xsl</step>
+      <step>i2.xsl</step>
+    </command>
+    <command type="xsl" label="Preprocessing für Texte">
+      <step>t1.xsl</step>
+      <step>t2.xsl</step>
+    </command>
+    <command label="Rest">
+      standard.xsl
     </command>
   </process>
   <struct label=""></struct>

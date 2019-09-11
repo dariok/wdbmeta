@@ -198,6 +198,7 @@
               </rng:data>
             </rng:attribute>
           </rng:choice>
+          <rng:ref name="labellingGroup" />
         </rng:optional>
         <rng:choice>
           <rng:data type="anyURI"/>
