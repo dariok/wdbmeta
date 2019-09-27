@@ -420,7 +420,7 @@
   </rng:define>
   <rng:define name="pidGroup">
     <rng:attribute name="pid">
-      <rng:data type="ID">
+      <rng:data type="anyURI">
         <a:documentation>Contains an externally defined persistent identifier for this
           resource.</a:documentation>
       </rng:data>
