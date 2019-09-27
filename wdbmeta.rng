@@ -13,6 +13,9 @@
     <rng:element name="projectMD">
       <rng:element name="projectID">
         <rng:text/>
+        <rng:optional>
+          <rng:ref name="pidGroup" />
+        </rng:optional>
       </rng:element>
       <rng:element name="titleData">
         <rng:ref name="titleDataType"/>
@@ -213,10 +216,13 @@
       </rng:element>
     </rng:oneOrMore>
     <rng:attribute name="target">
-      <rng:data type="string">
+      <rng:list>
+        <rng:data type=""></rng:data>
+      </rng:list>
+      <!--<rng:data type="string">
         <a:documentation> Specifies the processing target; this should be a file format or mime
           type. </a:documentation>
-      </rng:data>
+      </rng:data>-->
     </rng:attribute>
   </rng:define>
 
@@ -259,12 +265,7 @@
       </rng:data>
     </rng:attribute>
     <rng:optional>
-      <rng:attribute name="pid">
-        <rng:data type="ID">
-          <a:documentation>Contains an externally defined persistent identifier for this
-            resource.</a:documentation>
-        </rng:data>
-      </rng:attribute>
+      <rng:ref name="pidGroup" />
     </rng:optional>
     <rng:ref name="idGroup"/>
     <rng:ref name="pathGroup"/>
@@ -429,6 +430,14 @@
     <rng:attribute name="id" ns="http://www.w3.org/XML/1998/namespace"
       datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
       <rng:data type="ID"/>
+    </rng:attribute>
+  </rng:define>
+  <rng:define name="pidGroup">
+    <rng:attribute name="pid">
+      <rng:data type="ID">
+        <a:documentation>Contains an externally defined persistent identifier for this
+          resource.</a:documentation>
+      </rng:data>
     </rng:attribute>
   </rng:define>
   
