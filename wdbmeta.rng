@@ -153,6 +153,7 @@
                 in the part element. </a:documentation>
             </rng:data>
           </rng:attribute>
+          <rng:text />
         </rng:element>
       </rng:oneOrMore>
     </rng:element>
@@ -331,12 +332,14 @@
           <rng:element name="person">
             <a:documentation> Contains names and all other relevant information about people </a:documentation>
             <rng:ref name="involvementAttrGroup"/>
+            <rng:text />
           </rng:element>
         </rng:oneOrMore>
         <rng:oneOrMore>
           <rng:element name="org">
             <a:documentation> Contains names and all other relevant information about organizations </a:documentation>
             <rng:ref name="involvementAttrGroup"/>
+            <rng:text />
           </rng:element>
         </rng:oneOrMore>
       </rng:choice>
