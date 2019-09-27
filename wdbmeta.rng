@@ -217,7 +217,7 @@
     </rng:oneOrMore>
     <rng:attribute name="target">
       <rng:list>
-        <rng:data type=""></rng:data>
+        <rng:data type="anyURI" />
       </rng:list>
       <!--<rng:data type="string">
         <a:documentation> Specifies the processing target; this should be a file format or mime
