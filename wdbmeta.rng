@@ -224,6 +224,15 @@
           type. </a:documentation>
       </rng:data>
     </rng:attribute>
+    <rng:optional>
+      <rng:attribute name="view">
+        <rng:data type="string">
+          <a:documentation>Specifies a parameter by which to select a command if several are present for a given file
+            type, or may serve as parameter to the command(s) if only one process is present for the
+            target.</a:documentation>
+        </rng:data>
+      </rng:attribute>
+    </rng:optional>
   </rng:define>
 
   <!-- files and grouping -->
