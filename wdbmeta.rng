@@ -242,16 +242,14 @@
       process/command/@group). </a:documentation>
     <rng:choice>
       <rng:oneOrMore>
-        <rng:element name="file">
-          <rng:ref name="fileType"/>
-        </rng:element>
+        <rng:ref name="fileType"/>
       </rng:oneOrMore>
       <rng:oneOrMore>
         <rng:element name="filegroup">
           <a:documentation> Groups together files within the project. </a:documentation>
-          <rng:element name="file">
-            <rng:ref name="fileType"/>
-          </rng:element>
+          <rng:oneOrMore>
+            <rng:ref name="fileType" />
+          </rng:oneOrMore>
           <rng:ref name="idGroup" />
         </rng:element>
       </rng:oneOrMore>
@@ -266,41 +264,43 @@
   </rng:define>
 
   <rng:define name="fileType">
-    <a:documentation> Groups together relevant metadata about one single file contained within the
-      project. </a:documentation>
-    <rng:attribute name="uuid">
-      <rng:data type="string">
-        <a:documentation> Contains the UUID v3 generated for the file. </a:documentation>
-      </rng:data>
-    </rng:attribute>
-    <rng:optional>
-      <rng:ref name="pidGroup" />
-    </rng:optional>
-    <rng:ref name="idGroup"/>
-    <rng:ref name="pathGroup"/>
-    <rng:attribute name="date">
-      <rng:data type="dateTime">
-        <a:documentation> Contains the timestamp of when the file was last modified.
-        </a:documentation>
-      </rng:data>
-    </rng:attribute>
-    <rng:optional>
-      <rng:attribute name="mime">
-        <a:documentation> May contain the MIME type of the file if it is not abvious e.g. from the
-          extension. </a:documentation>
+    <rng:element name="file">
+      <a:documentation> Groups together relevant metadata about one single file contained within the
+        project. </a:documentation>
+      <rng:attribute name="uuid">
+        <rng:data type="string">
+          <a:documentation> Contains the UUID v3 generated for the file. </a:documentation>
+        </rng:data>
       </rng:attribute>
-    </rng:optional>
-    <rng:optional>
-      <rng:attribute name="status">
-        <a:documentation> Contains the status of the file; default is "public". </a:documentation>
-        <rng:choice>
-          <rng:value>public</rng:value>
-          <rng:value>beta</rng:value>
-          <rng:value>inProgress</rng:value>
-          <rng:value>internal</rng:value>
-        </rng:choice>
+      <rng:optional>
+        <rng:ref name="pidGroup" />
+      </rng:optional>
+      <rng:ref name="idGroup"/>
+      <rng:ref name="pathGroup"/>
+      <rng:attribute name="date">
+        <rng:data type="dateTime">
+          <a:documentation> Contains the timestamp of when the file was last modified.
+          </a:documentation>
+        </rng:data>
       </rng:attribute>
-    </rng:optional>
+      <rng:optional>
+        <rng:attribute name="mime">
+          <a:documentation> May contain the MIME type of the file if it is not abvious e.g. from the
+            extension. </a:documentation>
+        </rng:attribute>
+      </rng:optional>
+      <rng:optional>
+        <rng:attribute name="status">
+          <a:documentation> Contains the status of the file; default is "public". </a:documentation>
+          <rng:choice>
+            <rng:value>public</rng:value>
+            <rng:value>beta</rng:value>
+            <rng:value>inProgress</rng:value>
+            <rng:value>internal</rng:value>
+          </rng:choice>
+        </rng:attribute>
+      </rng:optional>
+    </rng:element>
   </rng:define>
 
   <!-- structures -->
