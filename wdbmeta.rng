@@ -402,24 +402,24 @@
           label while optional elements i, b or u may be used to style spans of text.</a:documentation>
         <rng:optional>
           <rng:attribute name="style" />
-          <rng:oneOrMore>
-            <rng:choice>
-              <rng:element name="i">
-                <a:documentation>Italic text in a label</a:documentation>
-                <rng:text />
-              </rng:element>
-              <rng:element name="b">
-                <a:documentation>Bold text in a label</a:documentation>
-                <rng:text />
-              </rng:element>
-              <rng:element name="u">
-                <a:documentation>Underlined text in a label</a:documentation>
-                <rng:text />
-              </rng:element>
-              <rng:text />
-            </rng:choice>
-          </rng:oneOrMore>
         </rng:optional>
+        <rng:oneOrMore>
+          <rng:choice>
+            <rng:element name="i">
+              <a:documentation>Italic text in a label</a:documentation>
+              <rng:text />
+            </rng:element>
+            <rng:element name="b">
+              <a:documentation>Bold text in a label</a:documentation>
+              <rng:text />
+            </rng:element>
+            <rng:element name="u">
+              <a:documentation>Underlined text in a label</a:documentation>
+              <rng:text />
+            </rng:element>
+            <rng:text />
+          </rng:choice>
+        </rng:oneOrMore>
       </rng:element>
     </rng:choice>
     <rng:optional>
