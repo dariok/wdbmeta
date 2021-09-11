@@ -315,7 +315,7 @@
         </rng:element>
         <rng:element name="view">
           <a:documentation> Represents a link to a process for one single file </a:documentation>
-          <rng:ref name="fileGroup"/>
+          <rng:ref name="fileAttributes"/>
           <rng:optional>
             <rng:attribute name="target">
               <rng:data type="string">
@@ -335,12 +335,7 @@
     </rng:zeroOrMore>
     <rng:ref name="labellingGroup"/>
     <rng:optional>
-      <rng:attribute name="file">
-        <rng:data type="IDREF">
-          <a:documentation> Contains the reference to the ID of one file element defined in this
-            wdbmeta file. </a:documentation>
-        </rng:data>
-      </rng:attribute>
+      <rng:ref name="fileAttributes" />
     </rng:optional>
   </rng:define>
 
@@ -420,10 +415,10 @@
     </rng:optional>
   </rng:define>
 
-  <rng:define name="fileGroup">
+  <rng:define name="fileAttributes">
     <rng:attribute name="file">
       <rng:data type="IDREF">
-        <a:documentation> Contains the reference to the ID of one file defined in this file.
+        <a:documentation> Contains the reference to the ID of one file or ptr element defined in this file.
         </a:documentation>
       </rng:data>
     </rng:attribute>
