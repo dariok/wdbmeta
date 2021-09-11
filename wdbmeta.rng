@@ -402,6 +402,8 @@
           label while optional elements i, b or u may be used to style spans of text.</a:documentation>
         <rng:optional>
           <rng:attribute name="style" />
+        </rng:optional>
+        <rng:oneOrMore>
           <rng:oneOrMore>
             <rng:choice>
               <rng:element name="i">
@@ -419,7 +421,7 @@
               <rng:text />
             </rng:choice>
           </rng:oneOrMore>
-        </rng:optional>
+        </rng:oneOrMore>
       </rng:element>
     </rng:choice>
     <rng:optional>
