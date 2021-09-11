@@ -391,12 +391,37 @@
   </rng:define>
 
   <rng:define name="labellingGroup">
-    <rng:attribute name="label">
-      <rng:data type="string">
-        <a:documentation> Contains a string representing this struct or view within the "table of
-          contents". </a:documentation>
-      </rng:data>
-    </rng:attribute>
+    <a:documentation>Contains a description of this struct or view within the "table of contents".</a:documentation>
+    <rng:choice>
+      <rng:attribute name="label">
+        <a:documentation>A simple, unformatted string</a:documentation>
+        <rng:data type="string" />
+      </rng:attribute>
+      <rng:element name="label">
+        <a:documentation>Contains styled text used as a label; an optional style attribute may contain CSS for the whole
+          label while optional elements i, b or u may be used to style spans of text.</a:documentation>
+        <rng:optional>
+          <rng:attribute name="style" />
+          <rng:oneOrMore>
+            <rng:choice>
+              <rng:element name="i">
+                <a:documentation>Italic text in a label</a:documentation>
+                <rng:text />
+              </rng:element>
+              <rng:element name="b">
+                <a:documentation>Bold text in a label</a:documentation>
+                <rng:text />
+              </rng:element>
+              <rng:element name="u">
+                <a:documentation>Underlined text in a label</a:documentation>
+                <rng:text />
+              </rng:element>
+              <rng:text />
+            </rng:choice>
+          </rng:oneOrMore>
+        </rng:optional>
+      </rng:element>
+    </rng:choice>
     <rng:optional>
       <rng:attribute name="order">
         <rng:data type="integer">
