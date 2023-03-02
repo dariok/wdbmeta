@@ -99,6 +99,21 @@
         <rng:ref name="nonEmptyString"/>
       </rng:element>
     </rng:zeroOrMore>
+    <rng:zeroOrMore>
+      <rng:element name="coverImages">
+        <a:documentation>Contains a list of 1+ images to use on a cover page</a:documentation>
+        <rng:oneOrMore>
+          <rng:element name="image">
+            <a:documentation>Contains exactly one image</a:documentation>
+            <rng:attribute name="href">
+              <rng:data type="anyURI">
+                <a:documentation>Contains the URL for this Image</a:documentation>
+              </rng:data>
+            </rng:attribute>
+          </rng:element>
+        </rng:oneOrMore>
+      </rng:element>
+    </rng:zeroOrMore>
   </rng:define>
 
   <!-- project meta data -->
