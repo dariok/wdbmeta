@@ -351,6 +351,7 @@
     <rng:ref name="labellingGroup"/>
     <rng:optional>
       <rng:ref name="fileAttributes" />
+      <rng:ref name="idGroup" />
     </rng:optional>
   </rng:define>
 
