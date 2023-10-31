@@ -63,15 +63,15 @@
           original resources. </a:documentation>
       </rng:element>
     </rng:optional>
-    <rng:oneOrMore>
+    <rng:zeroOrMore>
       <rng:element name="date">
-        <rng:data type="date">
+        <rng:data type="gYear">
           <a:documentation> Contains a date associated with the project, e.g. the date of
             publication. If multiple date elements are present, the earliest is considered the
             “from” date, the last the “to” date. </a:documentation>
         </rng:data>
       </rng:element>
-    </rng:oneOrMore>
+    </rng:zeroOrMore>
     <rng:zeroOrMore>
       <rng:element name="place">
         <a:documentation> Contains a place that is relevant to the project, e.g. the place a letter
@@ -113,6 +113,9 @@
           </rng:element>
         </rng:oneOrMore>
       </rng:element>
+    </rng:zeroOrMore>
+    <rng:zeroOrMore>
+      <rng:ref name="projectDesc" />
     </rng:zeroOrMore>
   </rng:define>
 
@@ -420,21 +423,7 @@
           <rng:attribute name="style" />
         </rng:optional>
         <rng:oneOrMore>
-          <rng:choice>
-            <rng:element name="i">
-              <a:documentation>Italic text in a label</a:documentation>
-              <rng:text />
-            </rng:element>
-            <rng:element name="b">
-              <a:documentation>Bold text in a label</a:documentation>
-              <rng:text />
-            </rng:element>
-            <rng:element name="u">
-              <a:documentation>Underlined text in a label</a:documentation>
-              <rng:text />
-            </rng:element>
-            <rng:text />
-          </rng:choice>
+          <rng:ref name="htmlLikeContent" />
         </rng:oneOrMore>
       </rng:element>
     </rng:choice>
@@ -486,6 +475,75 @@
           resource.</a:documentation>
       </rng:data>
     </rng:attribute>
+  </rng:define>
+   
+   <rng:define name="projectDesc">
+      <a:documentation>A general-purpose, prose description of the project. Simple, HTML-like content is allowed.</a:documentation>
+      <rng:element name="projectDesc">
+         <rng:oneOrMore>
+            <rng:ref name="proseP" />
+         </rng:oneOrMore>
+      </rng:element>
+   </rng:define>
+   
+   <rng:define name="proseP">
+      <a:documentation>A prose paragraph in a description</a:documentation>
+      <rng:element name="p">
+         <rng:ref name="htmlLikeAttributes" />
+         <rng:oneOrMore>
+            <rng:ref name="htmlLikeContent" />
+         </rng:oneOrMore>
+      </rng:element>
+   </rng:define>
+   
+   <rng:define name="htmlLikeAttributes">
+      <rng:optional>
+         <rng:attribute name="class" />
+      </rng:optional>
+      <rng:optional>
+         <rng:attribute name="style" />
+      </rng:optional>
+   </rng:define>
+   
+  <rng:define name="htmlLikeContent">
+    <rng:choice>
+      <rng:element name="i">
+         <a:documentation>Italic text in a label</a:documentation>
+         <rng:text />
+      </rng:element>
+      <rng:element name="b">
+         <a:documentation>Bold text in a label</a:documentation>
+         <rng:text />
+      </rng:element>
+      <rng:element name="u">
+         <a:documentation>Underlined text in a label</a:documentation>
+         <rng:text />
+      </rng:element>
+      <rng:element name="span">
+         <a:documentation>Equivalent to an HTML span</a:documentation>
+         <rng:attribute name="style" />
+         <rng:text />
+      </rng:element>
+      <rng:element name="br">
+         <a:documentation>Equivalent to an HTML br</a:documentation>
+         <rng:empty />
+      </rng:element>
+      <rng:element name="a">
+         <a:documentation>Equivalent to an HTML a</a:documentation>
+         <rng:attribute name="href">
+            <rng:data type="anyURI" />
+         </rng:attribute>
+         <rng:text />
+      </rng:element>
+      <rng:element name="img">
+         <a:documentation>Equivalent to an HTML img</a:documentation>
+         <rng:attribute name="src">
+            <rng:data type="anyURI" />
+         </rng:attribute>
+         <rng:attribute name="title" />
+      </rng:element>
+      <rng:text />
+    </rng:choice>
   </rng:define>
   
   <rng:define name="nonEmptyString">
