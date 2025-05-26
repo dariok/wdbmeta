@@ -1,9 +1,7 @@
 <rng:grammar xmlns:rng="http://relaxng.org/ns/structure/1.0"
    xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
-   xmlns:wdbmeta="https://github.com/dariok/wdbplus/wdbmeta"
-   xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
-   xmlns:meta="https://github.com/dariok/wdbplus/wdbmeta"
-   ns="https://github.com/dariok/wdbplus/wdbmeta"
+   xmlns:wdbmeta="https://github.com/dariok/wdbplus/wdbmeta" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
+   xmlns:meta="https://github.com/dariok/wdbplus/wdbmeta" ns="https://github.com/dariok/wdbplus/wdbmeta"
    datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
 
    <rng:start combine="choice">
@@ -27,31 +25,31 @@
          <rng:element name="files">
             <rng:ref name="filesDataType"/>
          </rng:element>
-         <!--<rng:element name="process">
-        <rng:ref name="processDataType"/>
-      </rng:element>-->
-         <rng:ref name="processElement"/>
+         <rng:element name="processes">
+            <rng:oneOrMore>
+               <rng:ref name="processElement"/>
+            </rng:oneOrMore>
+         </rng:element>
          <rng:element name="struct">
             <rng:ref name="structureType"/>
          </rng:element>
          <rng:ref name="idGroup">
-            <a:documentation>A unique ID for this (sub-)project. While it is not required and may be
-               necessary for certain setups, its value SHOULD correspond to the projectID
-               element.</a:documentation>
+            <a:documentation>A unique ID for this (sub-)project. While it is not required and may be necessary for
+               certain setups, its value SHOULD correspond to the projectID element.</a:documentation>
          </rng:ref>
       </rng:element>
    </rng:define>
 
    <rng:define name="titleDataType">
-      <a:documentation> Contains the most important metadata for this project. These might be used
-         for cataloguing, citation etc. </a:documentation>
+      <a:documentation> Contains the most important metadata for this project. These might be used for cataloguing,
+         citation etc. </a:documentation>
       <rng:oneOrMore>
          <rng:element name="title">
             <a:documentation> Contains the title(s) of the project. </a:documentation>
             <rng:attribute name="type">
                <rng:data type="string">
-                  <a:documentation> May be used to give the type of the title. Suggested values are
-                     'main' and 'sub'. </a:documentation>
+                  <a:documentation> May be used to give the type of the title. Suggested values are 'main' and 'sub'.
+                  </a:documentation>
                </rng:data>
             </rng:attribute>
             <rng:ref name="nonEmptyString"/>
@@ -60,27 +58,26 @@
       <rng:optional>
          <rng:element name="involvement">
             <rng:ref name="involvementGroup"/>
-            <a:documentation> Contains people and organizations that were involved in creating the
-               original resources. </a:documentation>
+            <a:documentation> Contains people and organizations that were involved in creating the original resources.
+            </a:documentation>
          </rng:element>
       </rng:optional>
       <rng:zeroOrMore>
          <rng:element name="date">
             <rng:data type="gYear">
-               <a:documentation> Contains a date associated with the project, e.g. the date of
-                  publication. If multiple date elements are present, the earliest is considered the
-                  “from” date, the last the “to” date. </a:documentation>
+               <a:documentation> Contains a date associated with the project, e.g. the date of publication. If multiple
+                  date elements are present, the earliest is considered the “from” date, the last the “to” date.
+               </a:documentation>
             </rng:data>
          </rng:element>
       </rng:zeroOrMore>
       <rng:zeroOrMore>
          <rng:element name="place">
-            <a:documentation> Contains a place that is relevant to the project, e.g. the place a
-               letter was sent from or a newspaper was published. </a:documentation>
+            <a:documentation> Contains a place that is relevant to the project, e.g. the place a letter was sent from or
+               a newspaper was published. </a:documentation>
             <rng:attribute name="ref">
                <rng:data type="anyURI">
-                  <a:documentation> Contains an ID from an authority file or central index.
-                  </a:documentation>
+                  <a:documentation> Contains an ID from an authority file or central index. </a:documentation>
                </rng:data>
             </rng:attribute>
             <rng:ref name="nonEmptyString"/>
@@ -89,14 +86,13 @@
       <rng:zeroOrMore>
          <rng:element name="language">
             <rng:ref name="nonEmptyString"/>
-            <a:documentation> Information about the languages used in the source texts. Should
-               conform to RFC 5646. </a:documentation>
+            <a:documentation> Information about the languages used in the source texts. Should conform to RFC 5646.
+            </a:documentation>
          </rng:element>
       </rng:zeroOrMore>
       <rng:zeroOrMore>
          <rng:element name="type">
-            <a:documentation> Information about the type of the original resources edited in this
-               project </a:documentation>
+            <a:documentation> Information about the type of the original resources edited in this project </a:documentation>
             <rng:attribute name="href">
                <rng:choice>
                   <rng:value>https://d-nb.info/gnd/4143413-4</rng:value>
@@ -160,28 +156,25 @@
 
    <!-- project meta data -->
    <rng:define name="metaDataType">
-      <a:documentation> The meta data section groups together all global meta data for the project
-         described by this file, such as people and organizations involved in its creation and legal
-         information. </a:documentation>
+      <a:documentation> The meta data section groups together all global meta data for the project described by this
+         file, such as people and organizations involved in its creation and legal information. </a:documentation>
       <rng:element name="contentGroup">
          <a:documentation> Contains a list of what types of content belongs to the project. </a:documentation>
          <rng:oneOrMore>
             <rng:choice>
                <rng:oneOrMore>
                   <rng:element name="content">
-                     <a:documentation> Contains the information for one type of content, such as
-                        “images”, or “introductions”, etc. </a:documentation>
+                     <a:documentation> Contains the information for one type of content, such as “images”, or
+                        “introductions”, etc. </a:documentation>
                      <rng:element name="description">
-                        <a:documentation>Contains a free description of the
-                           content.</a:documentation>
+                        <a:documentation>Contains a free description of the content.</a:documentation>
                         <rng:ref name="nonEmptyString"/>
                      </rng:element>
                      <rng:optional>
                         <rng:element name="external">
                            <rng:data type="string">
-                              <a:documentation> Contains a short documentation where external
-                                 resources can be found. For internal resources, use the “file”
-                                 elements. </a:documentation>
+                              <a:documentation> Contains a short documentation where external resources can be found.
+                                 For internal resources, use the “file” elements. </a:documentation>
                            </rng:data>
                         </rng:element>
                      </rng:optional>
@@ -193,8 +186,7 @@
       </rng:element>
       <rng:element name="involvement">
          <rng:ref name="involvementGroup"/>
-         <a:documentation> Contains people and organizations involved in creating this project.
-         </a:documentation>
+         <a:documentation> Contains people and organizations involved in creating this project. </a:documentation>
       </rng:element>
       <rng:element name="legal">
          <a:documentation> Contains legal information </a:documentation>
@@ -203,15 +195,14 @@
                <a:documentation> Contains information about the licence of (parts of) the project. </a:documentation>
                <rng:attribute name="content">
                   <rng:data type="IDREFS">
-                     <a:documentation> Contains a description, to which parts of the project this
-                        licence applies. It is possible to add IDREFs to these parts.
-                     </a:documentation>
+                     <a:documentation> Contains a description, to which parts of the project this licence applies. It is
+                        possible to add IDREFs to these parts. </a:documentation>
                   </rng:data>
                </rng:attribute>
                <rng:attribute name="href">
                   <rng:data type="anyURI">
-                     <a:documentation> Contains a link to the licence that applies to the parts
-                        described in the part element. </a:documentation>
+                     <a:documentation> Contains a link to the licence that applies to the parts described in the part
+                        element. </a:documentation>
                   </rng:data>
                </rng:attribute>
                <rng:text/>
@@ -222,55 +213,46 @@
 
    <!-- "behaviours" -->
    <rng:define name="processElement">
-      <a:documentation> A process groups together commands which process the data within the
-         edition. It is mandatory to specify the processing target. At least one command needs to be
-         specified. Commands are evaluated from the top and the first with matching condition(s) is
-         considered the one to be used for processing. </a:documentation>
+      <a:documentation> A process groups together commands which process the data within the edition. It is mandatory to
+         specify the processing target. At least one command needs to be specified. Commands are evaluated from the top
+         and the first with matching condition(s) is considered the one to be used for processing. </a:documentation>
       <rng:element name="process">
-         <rng:choice>
-            <rng:oneOrMore>
-               <rng:element name="process">
-                  <rng:ref name="processDataType"/>
-               </rng:element>
-            </rng:oneOrMore>
-            <rng:ref name="processDataType"/>
-         </rng:choice>
+         <rng:ref name="processDataType"/>
       </rng:element>
    </rng:define>
    <rng:define name="processDataType">
       <rng:oneOrMore>
          <rng:element name="command">
-            <a:documentation> A command must at least contain a URI to identify the action to be
-               taken and information as to the type of action that is described. Whether a command
-               matches is determined by evaluating @refs and @regex with respect to the ID supplied
-               for processing or by matching @group to a group of entries within the same file. If
-               neither @refs, @regex nor @group are present, the command will match anything and
-               thus no following command will ever be executed. </a:documentation>
+            <a:documentation> A command must at least contain a URI to identify the action to be taken and information
+               as to the type of action that is described. Whether a command matches is determined by evaluating @refs
+               and @regex with respect to the ID supplied for processing or by matching @group to a group of entries
+               within the same file. If neither @refs, @regex nor @group are present, the command will match anything
+               and thus no following command will ever be executed. </a:documentation>
             <rng:attribute name="type">
                <rng:data type="string">
-                  <a:documentation> Gives the type of processing that is specified, e.g. 'xsl',
-                     'xquery', 'ant'. </a:documentation>
+                  <a:documentation> Gives the type of processing that is specified, e.g. 'xsl', 'xquery', 'ant'.
+                  </a:documentation>
                </rng:data>
             </rng:attribute>
             <rng:optional>
                <rng:choice>
                   <rng:attribute name="refs">
                      <rng:data type="string">
-                        <a:documentation> Contains a whitespace separated sequence of ID values to
-                           be checked. If a supplied ID exactly matches any of these values, this
-                           criterion matches as a whole. </a:documentation>
+                        <a:documentation> Contains a whitespace separated sequence of ID values to be checked. If a
+                           supplied ID exactly matches any of these values, this criterion matches as a whole.
+                        </a:documentation>
                      </rng:data>
                   </rng:attribute>
                   <rng:attribute name="regex">
                      <rng:data type="string">
-                        <a:documentation> Contains one regular expression against which a supplied
-                           ID value is tested. </a:documentation>
+                        <a:documentation> Contains one regular expression against which a supplied ID value is tested.
+                        </a:documentation>
                      </rng:data>
                   </rng:attribute>
                   <rng:attribute name="group">
                      <rng:data type="IDREFS">
-                        <a:documentation> Points to one or more IDs of groups within the same file,
-                           e.g. defined by a file/group/@id. </a:documentation>
+                        <a:documentation> Points to one or more IDs of groups within the same file, e.g. defined by a
+                           file/group/@id. </a:documentation>
                      </rng:data>
                   </rng:attribute>
                </rng:choice>
@@ -280,16 +262,16 @@
       </rng:oneOrMore>
       <rng:attribute name="target">
          <rng:data type="string">
-            <a:documentation> Specifies the processing target; this should be a file format or mime
-               type. </a:documentation>
+            <a:documentation> Specifies the processing target; this should be a file format or mime type.
+            </a:documentation>
          </rng:data>
       </rng:attribute>
       <rng:optional>
          <rng:attribute name="view">
             <rng:data type="string">
-               <a:documentation>Specifies a parameter by which to select a command if several are
-                  present for a given file type, or may serve as parameter to the command(s) if only
-                  one process is present for the target.</a:documentation>
+               <a:documentation>Specifies a parameter by which to select a command if several are present for a given
+                  file type, or may serve as parameter to the command(s) if only one process is present for the
+                  target.</a:documentation>
             </rng:data>
          </rng:attribute>
       </rng:optional>
@@ -297,9 +279,8 @@
 
    <!-- files and grouping -->
    <rng:define name="filesDataType">
-      <a:documentation> Contains a list of all files that belong to the project. These files may be
-         grouped together but not repeated. This grouping may e.g. be used for processing (cf.
-         process/command/@group). </a:documentation>
+      <a:documentation> Contains a list of all files that belong to the project. These files may be grouped together but
+         not repeated. This grouping may e.g. be used for processing (cf. process/command/@group). </a:documentation>
       <rng:choice>
          <rng:oneOrMore>
             <rng:ref name="fileType"/>
@@ -325,8 +306,7 @@
 
    <rng:define name="fileType">
       <rng:element name="file">
-         <a:documentation> Groups together relevant metadata about one single file contained within
-            the project. </a:documentation>
+         <a:documentation> Groups together relevant metadata about one single file contained within the project. </a:documentation>
          <rng:attribute name="uuid">
             <rng:data type="string">
                <a:documentation> Contains the UUID v3 generated for the file. </a:documentation>
@@ -339,14 +319,13 @@
          <rng:ref name="pathGroup"/>
          <rng:attribute name="date">
             <rng:data type="dateTime">
-               <a:documentation> Contains the timestamp of when the file was last modified.
-               </a:documentation>
+               <a:documentation> Contains the timestamp of when the file was last modified. </a:documentation>
             </rng:data>
          </rng:attribute>
          <rng:optional>
             <rng:attribute name="mime">
-               <a:documentation> May contain the MIME type of the file if it is not abvious e.g.
-                  from the extension. </a:documentation>
+               <a:documentation> May contain the MIME type of the file if it is not abvious e.g. from the extension.
+               </a:documentation>
             </rng:attribute>
          </rng:optional>
          <rng:optional>
@@ -365,9 +344,8 @@
 
    <!-- structures -->
    <rng:define name="structureType">
-      <a:documentation> Contains a definition about how views to the files are ordered, the closest
-         analogy being a table of contents. May contain any combination of either a view (which
-         point to processes) or other struct. </a:documentation>
+      <a:documentation> Contains a definition about how views to the files are ordered, the closest analogy being a
+         table of contents. May contain any combination of either a view (which point to processes) or other struct. </a:documentation>
       <rng:zeroOrMore>
          <rng:choice>
             <rng:element name="struct">
@@ -379,9 +357,9 @@
                <rng:optional>
                   <rng:attribute name="target">
                      <rng:data type="string">
-                        <a:documentation> References one process/@target as defined in this file. If
-                           none is specified, the implementation should use the first process
-                           defined in this file by document order. </a:documentation>
+                        <a:documentation> References one process/@target as defined in this file. If none is specified,
+                           the implementation should use the first process defined in this file by document order.
+                        </a:documentation>
                      </rng:data>
                   </rng:attribute>
                </rng:optional>
@@ -404,8 +382,8 @@
 
    <!-- people and organizations -->
    <rng:define name="involvementGroup">
-      <a:documentation> Contains elements for those who can be involved in a project or the original
-         text, namely people or any kind of organization. </a:documentation>
+      <a:documentation> Contains elements for those who can be involved in a project or the original text, namely people
+         or any kind of organization. </a:documentation>
       <rng:zeroOrMore>
          <rng:choice>
             <rng:oneOrMore>
@@ -417,8 +395,7 @@
             </rng:oneOrMore>
             <rng:oneOrMore>
                <rng:element name="org">
-                  <a:documentation> Contains names and all other relevant information about
-                     organizations </a:documentation>
+                  <a:documentation> Contains names and all other relevant information about organizations </a:documentation>
                   <rng:ref name="involvementAttrGroup"/>
                   <rng:text/>
                </rng:element>
@@ -432,41 +409,37 @@
       <rng:optional>
          <rng:attribute name="contribution">
             <rng:data type="IDREFS">
-               <a:documentation> A list of what has been contributed to as a list of IDREFs
-               </a:documentation>
+               <a:documentation> A list of what has been contributed to as a list of IDREFs </a:documentation>
             </rng:data>
          </rng:attribute>
       </rng:optional>
       <rng:optional>
          <rng:attribute name="role">
             <rng:data type="string">
-               <a:documentation> Describes the role a person or organization played
-               </a:documentation>
+               <a:documentation> Describes the role a person or organization played </a:documentation>
             </rng:data>
          </rng:attribute>
       </rng:optional>
       <rng:optional>
          <rng:attribute name="href">
             <rng:data type="anyURI">
-               <a:documentation> Contains a reference to additional information, preferably an
-                  authority file. </a:documentation>
+               <a:documentation> Contains a reference to additional information, preferably an authority file.
+               </a:documentation>
             </rng:data>
          </rng:attribute>
       </rng:optional>
    </rng:define>
 
    <rng:define name="labellingGroup">
-      <a:documentation>Contains a description of this struct or view within the "table of
-         contents".</a:documentation>
+      <a:documentation>Contains a description of this struct or view within the "table of contents".</a:documentation>
       <rng:choice>
          <rng:attribute name="label">
             <a:documentation>A simple, unformatted string</a:documentation>
             <rng:data type="string"/>
          </rng:attribute>
          <rng:element name="label">
-            <a:documentation>Contains styled text used as a label; an optional style attribute may
-               contain CSS for the whole label while optional elements i, b or u may be used to
-               style spans of text.</a:documentation>
+            <a:documentation>Contains styled text used as a label; an optional style attribute may contain CSS for the
+               whole label while optional elements i, b or u may be used to style spans of text.</a:documentation>
             <rng:optional>
                <rng:attribute name="style"/>
             </rng:optional>
@@ -478,16 +451,16 @@
       <rng:optional>
          <rng:attribute name="order">
             <rng:data type="integer">
-               <a:documentation> Optionally defines a value by which entries are to be ordered if
-                  they are not to be returned in document order. </a:documentation>
+               <a:documentation> Optionally defines a value by which entries are to be ordered if they are not to be
+                  returned in document order. </a:documentation>
             </rng:data>
          </rng:attribute>
       </rng:optional>
       <rng:optional>
          <rng:attribute name="private">
             <rng:data type="boolean">
-               <a:documentation> Optionally sets the structure or view to be private. How this is
-                  treated is up to the implementing software. </a:documentation>
+               <a:documentation> Optionally sets the structure or view to be private. How this is treated is up to the
+                  implementing software. </a:documentation>
             </rng:data>
          </rng:attribute>
       </rng:optional>
@@ -496,8 +469,8 @@
    <rng:define name="fileAttributes">
       <rng:attribute name="file">
          <rng:data type="IDREF">
-            <a:documentation> Contains the reference to the ID of one file or ptr element defined in
-               this file. </a:documentation>
+            <a:documentation> Contains the reference to the ID of one file or ptr element defined in this file.
+            </a:documentation>
          </rng:data>
       </rng:attribute>
    </rng:define>
@@ -519,15 +492,14 @@
    <rng:define name="pidGroup">
       <rng:attribute name="pid">
          <rng:data type="anyURI">
-            <a:documentation>Contains an externally defined persistent identifier for this
-               resource.</a:documentation>
+            <a:documentation>Contains an externally defined persistent identifier for this resource.</a:documentation>
          </rng:data>
       </rng:attribute>
    </rng:define>
 
    <rng:define name="projectDesc">
-      <a:documentation>A general-purpose, prose description of the project. Simple, HTML-like
-         content is allowed.</a:documentation>
+      <a:documentation>A general-purpose, prose description of the project. Simple, HTML-like content is
+         allowed.</a:documentation>
       <rng:element name="projectDesc">
          <rng:oneOrMore>
             <rng:ref name="proseP"/>
