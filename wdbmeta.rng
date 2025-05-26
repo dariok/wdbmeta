@@ -287,10 +287,10 @@
          </rng:oneOrMore>
          <rng:oneOrMore>
             <rng:element name="filegroup">
-               <a:documentation> Groups together files within the project. </a:documentation>
-               <rng:oneOrMore>
-                  <rng:ref name="fileType"/>
-               </rng:oneOrMore>
+               <a:documentation> Groups together files within the project. May also contain pointers (to sub-projects),
+                  and other filegroups for more detailed hierarchies. These may not, however, mix: a filegroup must
+                  contains only ptr or only file or only filegroup. </a:documentation>
+               <rng:ref name="filesDataType" />
                <rng:ref name="idGroup"/>
             </rng:element>
          </rng:oneOrMore>
