@@ -31,6 +31,13 @@
             </rng:oneOrMore>
          </rng:element>
          <rng:element name="struct">
+            <rng:ref name="labellingGroup"/>
+            <rng:optional>
+               <rng:choice>
+                  <rng:ref name="fileAttributes"/>
+                  <rng:ref name="idGroup"/>
+               </rng:choice>
+            </rng:optional>
             <rng:ref name="structureType"/>
          </rng:element>
          <rng:ref name="idGroup">
@@ -349,6 +356,13 @@
       <rng:zeroOrMore>
          <rng:choice>
             <rng:element name="struct">
+               <rng:ref name="labellingGroup"/>
+               <rng:optional>
+                  <rng:choice>
+                     <rng:ref name="fileAttributes"/>
+                     <rng:ref name="idGroup"/>
+                  </rng:choice>
+               </rng:optional>
                <rng:ref name="structureType"/>
             </rng:element>
             <rng:element name="view">
@@ -371,13 +385,6 @@
             </rng:element>
          </rng:choice>
       </rng:zeroOrMore>
-      <rng:ref name="labellingGroup"/>
-      <rng:optional>
-         <rng:choice>
-            <rng:ref name="fileAttributes"/>
-            <rng:ref name="idGroup"/>
-         </rng:choice>
-      </rng:optional>
    </rng:define>
 
    <!-- people and organizations -->
