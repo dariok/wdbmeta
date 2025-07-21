@@ -191,10 +191,12 @@
             </rng:choice>
          </rng:oneOrMore>
       </rng:element>
-      <rng:element name="involvement">
-         <rng:ref name="involvementGroup"/>
-         <a:documentation> Contains people and organizations involved in creating this project. </a:documentation>
-      </rng:element>
+      <rng:optional>
+         <rng:element name="involvement">
+            <a:documentation> Contains people and organizations involved in the creation of the project. </a:documentation>
+            <rng:ref name="involvementGroup"/>
+         </rng:element>
+      </rng:optional>
       <rng:element name="legal">
          <a:documentation> Contains legal information </a:documentation>
          <rng:oneOrMore>
