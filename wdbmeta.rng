@@ -224,13 +224,15 @@
    <rng:define name="processElement">
       <a:documentation> A process groups together commands which process the data within the edition. It is mandatory to
          specify the processing target. At least one command needs to be specified. Commands are evaluated from the top
-         and the first with matching condition(s) is considered the one to be used for processing. </a:documentation>
+         and the first with matching condition(s) is considered the one to be used for processing. 
+         If not command is given, the processor is expected to move up the project tree to find a process with the same
+         values for @target and @view that does contain a command.</a:documentation>
       <rng:element name="process">
          <rng:ref name="processDataType"/>
       </rng:element>
    </rng:define>
    <rng:define name="processDataType">
-      <rng:oneOrMore>
+      <rng:optional>
          <rng:element name="command">
             <a:documentation> A command must at least contain a URI to identify the action to be taken and information
                as to the type of action that is described. Whether a command matches is determined by evaluating @refs
@@ -268,7 +270,7 @@
             </rng:optional>
             <rng:data type="anyURI"/>
          </rng:element>
-      </rng:oneOrMore>
+      </rng:optional>
       <rng:attribute name="target">
          <rng:data type="string">
             <a:documentation> Specifies the processing target; this should be a file format or mime type.
