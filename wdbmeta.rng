@@ -232,7 +232,7 @@
       </rng:element>
    </rng:define>
    <rng:define name="processDataType">
-      <rng:optional>
+      <rng:zeroOrMore>
          <rng:element name="command">
             <a:documentation> A command must at least contain a URI to identify the action to be taken and information
                as to the type of action that is described. Whether a command matches is determined by evaluating @refs
@@ -270,7 +270,7 @@
             </rng:optional>
             <rng:data type="anyURI"/>
          </rng:element>
-      </rng:optional>
+      </rng:zeroOrMore>
       <rng:attribute name="target">
          <rng:data type="string">
             <a:documentation> Specifies the processing target; this should be a file format or mime type.
