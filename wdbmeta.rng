@@ -336,10 +336,11 @@
                <rng:zeroOrMore>
                   <rng:element name="step">
                      <rng:attribute name="type">
-                        <rng:data type="string">
-                           <a:documentation>Gives the type of processing that is specified, e.g. 'xsl', 'xquery',
-                              'ant'.</a:documentation>
-                        </rng:data>
+                        <a:documentation>Gives the type of processing that is specified: 'xsl' or 'xquery'.</a:documentation>
+                        <rng:choice>
+                           <rng:value>xsl</rng:value>
+                           <rng:value>xquery</rng:value>
+                        </rng:choice>
                      </rng:attribute>
                      <rng:data type="anyURI" />
                      <a:documentation>If more than one step is required for processing, each step has to be given as xs:anyURI
