@@ -10,6 +10,10 @@
 
    <rng:define name="projectMD">
       <rng:element name="projectMD">
+         <rng:ref name="idGroup">
+            <a:documentation>A unique ID for this (sub-)project. While it is not required and may be necessary for
+               certain setups, its value SHOULD correspond to the projectID element.</a:documentation>
+         </rng:ref>
          <rng:element name="projectID">
             <rng:optional>
                <rng:ref name="pidGroup"/>
@@ -32,18 +36,8 @@
          </rng:element>
          <rng:element name="struct">
             <rng:ref name="labellingGroup"/>
-            <rng:optional>
-               <rng:choice>
-                  <rng:ref name="fileAttributes"/>
-                  <rng:ref name="idGroup"/>
-               </rng:choice>
-            </rng:optional>
             <rng:ref name="structureType"/>
          </rng:element>
-         <rng:ref name="idGroup">
-            <a:documentation>A unique ID for this (sub-)project. While it is not required and may be necessary for
-               certain setups, its value SHOULD correspond to the projectID element.</a:documentation>
-         </rng:ref>
       </rng:element>
    </rng:define>
 
@@ -144,7 +138,7 @@
             </sch:pattern>
          </rng:element>
       </rng:zeroOrMore>
-      <rng:zeroOrMore>
+      <rng:optional>
          <rng:element name="coverImages">
             <a:documentation>Contains a list of 1+ images to use on a cover page</a:documentation>
             <rng:oneOrMore>
@@ -158,10 +152,10 @@
                </rng:element>
             </rng:oneOrMore>
          </rng:element>
-      </rng:zeroOrMore>
-      <rng:zeroOrMore>
+      </rng:optional>
+      <rng:optional>
          <rng:ref name="projectDesc"/>
-      </rng:zeroOrMore>
+      </rng:optional>
    </rng:define>
 
    <!-- project meta data -->
@@ -223,74 +217,6 @@
       </rng:element>
    </rng:define>
 
-   <!-- "behaviours" -->
-   <rng:define name="processElement">
-      <a:documentation> A process groups together commands which process the data within the edition. It is mandatory to
-         specify the processing target. At least one command needs to be specified. Commands are evaluated from the top
-         and the first with matching condition(s) is considered the one to be used for processing. 
-         If not command is given, the processor is expected to move up the project tree to find a process with the same
-         values for @target and @view that does contain a command.</a:documentation>
-      <rng:element name="process">
-         <rng:ref name="processDataType"/>
-      </rng:element>
-   </rng:define>
-   <rng:define name="processDataType">
-      <rng:zeroOrMore>
-         <rng:element name="command">
-            <a:documentation> A command must at least contain a URI to identify the action to be taken and information
-               as to the type of action that is described. Whether a command matches is determined by evaluating @refs
-               and @regex with respect to the ID supplied for processing or by matching @group to a group of entries
-               within the same file. If neither @refs, @regex nor @group are present, the command will match anything
-               and thus no following command will ever be executed. </a:documentation>
-            <rng:attribute name="type">
-               <rng:data type="string">
-                  <a:documentation> Gives the type of processing that is specified, e.g. 'xsl', 'xquery', 'ant'.
-                  </a:documentation>
-               </rng:data>
-            </rng:attribute>
-            <rng:optional>
-               <rng:choice>
-                  <rng:attribute name="refs">
-                     <rng:data type="string">
-                        <a:documentation> Contains a whitespace separated sequence of ID values to be checked. If a
-                           supplied ID exactly matches any of these values, this criterion matches as a whole.
-                        </a:documentation>
-                     </rng:data>
-                  </rng:attribute>
-                  <rng:attribute name="regex">
-                     <rng:data type="string">
-                        <a:documentation> Contains one regular expression against which a supplied ID value is tested.
-                        </a:documentation>
-                     </rng:data>
-                  </rng:attribute>
-                  <rng:attribute name="group">
-                     <rng:data type="IDREFS">
-                        <a:documentation> Points to one or more IDs of groups within the same file, e.g. defined by a
-                           file/group/@id. </a:documentation>
-                     </rng:data>
-                  </rng:attribute>
-               </rng:choice>
-            </rng:optional>
-            <rng:data type="anyURI"/>
-         </rng:element>
-      </rng:zeroOrMore>
-      <rng:attribute name="target">
-         <rng:data type="string">
-            <a:documentation> Specifies the processing target; this should be a file format or mime type.
-            </a:documentation>
-         </rng:data>
-      </rng:attribute>
-      <rng:optional>
-         <rng:attribute name="view">
-            <rng:data type="string">
-               <a:documentation>Specifies a parameter by which to select a command if several are present for a given
-                  file type, or may serve as parameter to the command(s) if only one process is present for the
-                  target.</a:documentation>
-            </rng:data>
-         </rng:attribute>
-      </rng:optional>
-   </rng:define>
-
    <!-- files and grouping -->
    <rng:define name="filesDataType">
       <a:documentation> Contains a list of all files that belong to the project. These files may be grouped together but
@@ -304,20 +230,19 @@
                <a:documentation> Groups together files within the project. May also contain pointers (to sub-projects),
                   and other filegroups for more detailed hierarchies. These may not, however, mix: a filegroup must
                   contains only ptr or only file or only filegroup. </a:documentation>
-               <rng:ref name="filesDataType" />
                <rng:ref name="idGroup"/>
+               <rng:ref name="filesDataType" />
             </rng:element>
          </rng:oneOrMore>
          <rng:oneOrMore>
             <rng:element name="ptr">
                <a:documentation> Points to another metadata file that describes a subproject </a:documentation>
-               <rng:ref name="pathGroup"/>
                <rng:ref name="idGroup"/>
+               <rng:ref name="pathGroup"/>
             </rng:element>
          </rng:oneOrMore>
       </rng:choice>
    </rng:define>
-
    <rng:define name="fileType">
       <rng:element name="file">
          <a:documentation> Groups together relevant metadata about one single file contained within the project. </a:documentation>
@@ -335,40 +260,11 @@
             <rng:data type="dateTime">
                <a:documentation> Contains the timestamp of when the file was last modified. </a:documentation>
             </rng:data>
-          </rng:attribute>
-        </rng:element>
-      </rng:oneOrMore>
-    </rng:element>
-  </rng:define>
-
-  <!-- "behaviours" -->
-  <rng:define name="processDataType">
-    <a:documentation> A process groups together commands which process the data within the edition.
-      It is mandatory to specify the processing target. At least one command needs to be specified.
-      Commands are evaluated from the top and the first with matching condition(s) is considered the
-      one to be used for processing. </a:documentation>
-    <rng:oneOrMore>
-      <rng:element name="command">
-        <a:documentation>A command must contain one or more `step` elements that each contain exactly one xs:anyURI.
-          These steps are to be applied sequentially and in document order. Each `command` also needs to contain
-          information as to the type of action that is described. Whether a command matches is determined by evaluating
-          @refs and @regex with respect to the ID supplied for processing or by matching @group to a group of entries
-          within the same file. If neither @refs, @regex nor @group are present, the command will match anything and
-          thus no following command will ever be executed.</a:documentation>
-        <rng:optional>
-          <rng:choice>
-            <rng:attribute name="refs">
-              <rng:data type="string">
-                <a:documentation> Contains a whitespace separated sequence of ID values to be
-                  checked. If a supplied ID exactly matches any of these values, this criterion
-                  matches as a whole. </a:documentation>
-              </rng:data>
-            </rng:attribute>
-            <rng:attribute name="regex">
-              <rng:data type="string">
-                <a:documentation> Contains one regular expression against which a supplied ID value
-                  is tested. </a:documentation>
-              </rng:data>
+         </rng:attribute>
+         <rng:optional>
+            <rng:attribute name="mime">
+               <a:documentation> May contain the MIME type of the file if it is not abvious e.g. from the
+                  extension. </a:documentation>
             </rng:attribute>
          </rng:optional>
          <rng:optional>
@@ -381,33 +277,80 @@
                   <rng:value>internal</rng:value>
                </rng:choice>
             </rng:attribute>
-          </rng:choice>
-          <rng:ref name="labellingGroup" />
-        </rng:optional>
-        <rng:oneOrMore>
-          <rng:element name="step">
-          <rng:attribute name="type">
-            <rng:data type="string">
-              <a:documentation>Gives the type of processing that is specified, e.g. 'xsl', 'xquery',
-                'ant'.</a:documentation>
-            </rng:data>
-          </rng:attribute>
-          <rng:data type="anyURI" />
-          <a:documentation>If more than one step is required for processing, each step has to be given as xs:anyURI
-            in a `step` element of its own. These are applied in sequence.</a:documentation>
-         </rng:element>
-       </rng:oneOrMore>
+         </rng:optional>
       </rng:element>
-    </rng:oneOrMore>
-    <rng:attribute name="target">
-      <!-- TODO list possible targets; Cf. #15 -->
-      <rng:data type="string">
-        <a:documentation> Specifies the processing target; this should be a file format or mime
-          type. </a:documentation>
-      </rng:data>
-    </rng:attribute>
-  </rng:define>
+   </rng:define>
 
+   <!-- "behaviours" -->
+   <rng:define name="processElement">
+      <a:documentation>A process groups together commands which process the data within the edition. It is mandatory to
+         specify the processing target. At least one command needs to be specified. Commands are evaluated from the top
+         and the first with matching condition(s) is considered the one to be used for processing.</a:documentation>
+      <rng:element name="process">
+         <rng:attribute name="target">
+            <rng:data type="string">
+               <a:documentation> Specifies the processing target; this should be a file format or mime type.
+               </a:documentation>
+            </rng:data>
+         </rng:attribute>
+         <rng:optional>
+            <rng:attribute name="view">
+               <rng:data type="string">
+                  <a:documentation>Specifies a parameter by which to select a command if several are present for a given
+                     file type, or may serve as parameter to the command(s) if only one process is present for the
+                     target.</a:documentation>
+               </rng:data>
+            </rng:attribute>
+         </rng:optional>
+         <rng:oneOrMore>
+            <rng:element name="command">
+               <a:documentation>A command must contain one or more `step` elements that each contain exactly one xs:anyURI.
+                  These steps are to be applied sequentially and in document order. Each `command` also needs to contain
+                  information as to the type of action that is described. Whether a command matches is determined by evaluating
+                  @refs and @regex with respect to the ID supplied for processing or by matching @group to a group of entries
+                  within the same file. If neither @refs, @regex nor @group are present, the command will match anything and
+                  thus no following command will ever be executed.</a:documentation>
+               <rng:optional>
+                  <rng:choice>
+                     <rng:attribute name="refs">
+                        <rng:data type="string">
+                           <a:documentation> Contains a whitespace separated sequence of ID values to be checked. If a
+                              supplied ID exactly matches any of these values, this criterion matches as a whole.
+                           </a:documentation>
+                        </rng:data>
+                     </rng:attribute>
+                     <rng:attribute name="regex">
+                        <rng:data type="string">
+                           <a:documentation> Contains one regular expression against which a supplied ID value is tested.
+                           </a:documentation>
+                        </rng:data>
+                     </rng:attribute>
+                     <rng:attribute name="group">
+                        <rng:data type="IDREFS">
+                           <a:documentation> Points to one or more IDs of groups within the same file, e.g. defined by a
+                              filegroup/@id. </a:documentation>
+                        </rng:data>
+                     </rng:attribute>
+                  </rng:choice>
+               </rng:optional>
+               <rng:zeroOrMore>
+                  <rng:element name="step">
+                     <rng:attribute name="type">
+                        <rng:data type="string">
+                           <a:documentation>Gives the type of processing that is specified, e.g. 'xsl', 'xquery',
+                              'ant'.</a:documentation>
+                        </rng:data>
+                     </rng:attribute>
+                     <rng:data type="anyURI" />
+                     <a:documentation>If more than one step is required for processing, each step has to be given as xs:anyURI
+                        in a `step` element of its own. These are applied in sequence.</a:documentation>
+                  </rng:element>
+               </rng:zeroOrMore>
+            </rng:element>
+         </rng:oneOrMore>
+      </rng:element>
+   </rng:define>
+   
    <!-- structures -->
    <rng:define name="structureType">
       <a:documentation> Contains a definition about how views to the files are ordered, the closest analogy being a
@@ -445,44 +388,6 @@
          </rng:choice>
       </rng:zeroOrMore>
    </rng:define>
-
-  <rng:define name="fileType">
-    <a:documentation> Groups together relevant metadata about one single file contained within the
-      project. </a:documentation>
-    <rng:attribute name="uuid">
-      <rng:data type="string">
-        <a:documentation> Contains the UUID v3 generated for the file. </a:documentation>
-      </rng:data>
-    </rng:attribute>
-    <rng:optional>
-      <rng:ref name="pidGroup" />
-    </rng:optional>
-    <rng:ref name="idGroup"/>
-    <rng:ref name="pathGroup"/>
-    <rng:attribute name="date">
-      <rng:data type="dateTime">
-        <a:documentation> Contains the timestamp of when the file was last modified.
-        </a:documentation>
-      </rng:data>
-    </rng:attribute>
-    <rng:optional>
-      <rng:attribute name="mime">
-        <a:documentation> May contain the MIME type of the file if it is not abvious e.g. from the
-          extension. </a:documentation>
-      </rng:attribute>
-    </rng:optional>
-    <rng:optional>
-      <rng:attribute name="status">
-        <a:documentation> Contains the status of the file; default is "public". </a:documentation>
-        <rng:choice>
-          <rng:value>public</rng:value>
-          <rng:value>beta</rng:value>
-          <rng:value>inProgress</rng:value>
-          <rng:value>internal</rng:value>
-        </rng:choice>
-      </rng:attribute>
-    </rng:optional>
-  </rng:define>
   
    <!-- people and organizations -->
    <rng:define name="involvementGroup">
@@ -620,27 +525,7 @@
          </rng:oneOrMore>
       </rng:element>
    </rng:define>
-
-  <rng:define name="idGroup">
-    <rng:attribute name="id" ns="http://www.w3.org/XML/1998/namespace"
-      datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
-      <rng:data type="ID"/>
-    </rng:attribute>
-  </rng:define>
-  <rng:define name="pidGroup">
-    <rng:attribute name="pid">
-      <rng:data type="ID">
-        <a:documentation>Contains an externally defined persistent identifier for this
-          resource.</a:documentation>
-      </rng:data>
-    </rng:attribute>
-  </rng:define>
   
-  <rng:define name="nonEmptyString">
-    <rng:data type="string">
-      <rng:param name="pattern">(.|\n|\r)*\S(.|\n|\r)*</rng:param>
-    </rng:data>
-  </rng:define>
    <rng:define name="htmlLikeAttributes">
       <rng:optional>
          <rng:attribute name="class"/>
