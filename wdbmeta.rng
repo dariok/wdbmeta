@@ -302,7 +302,7 @@
                </rng:data>
             </rng:attribute>
          </rng:optional>
-         <rng:oneOrMore>
+         <rng:zeroOrMore>
             <rng:element name="command">
                <a:documentation>A command must contain one or more `step` elements that each contain exactly one xs:anyURI.
                   These steps are to be applied sequentially and in document order. Each `command` also needs to contain
@@ -333,7 +333,7 @@
                      </rng:attribute>
                   </rng:choice>
                </rng:optional>
-               <rng:zeroOrMore>
+               <rng:oneOrMore>
                   <rng:element name="step">
                      <rng:attribute name="type">
                         <a:documentation>Gives the type of processing that is specified: 'xsl' or 'xquery'.</a:documentation>
@@ -346,9 +346,9 @@
                      <a:documentation>If more than one step is required for processing, each step has to be given as xs:anyURI
                         in a `step` element of its own. These are applied in sequence.</a:documentation>
                   </rng:element>
-               </rng:zeroOrMore>
+               </rng:oneOrMore>
             </rng:element>
-         </rng:oneOrMore>
+         </rng:zeroOrMore>
       </rng:element>
    </rng:define>
    
