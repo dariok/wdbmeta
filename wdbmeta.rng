@@ -214,7 +214,8 @@
     <rng:attribute name="target">
       <!-- TODO list possible targets; Cf. #15 -->
       <rng:data type="string">
-        <a:documentation>Specifies the processing target; this should be a file format or mime type.</a:documentation>
+        <a:documentation> Specifies the processing target; this should be a file format or mime
+          type. </a:documentation>
       </rng:data>
     </rng:attribute>
   </rng:define>
