@@ -215,6 +215,24 @@
             </rng:element>
          </rng:oneOrMore>
       </rng:element>
+      <rng:optional>
+         <rng:element name="statistics">
+            <a:documentation>Optionally contains additional statistics about the contents of this project (but not its
+               subprojects).</a:documentation>
+            <rng:optional>
+               <rng:element name="extent">
+                  <a:documentation>Contains e.g. the number of word tokens in the texts directly within this
+                     project</a:documentation>
+                  <rng:attribute name="unit">
+                     <rng:choice>
+                        <rng:value>word-tokenss</rng:value>
+                     </rng:choice>
+                  </rng:attribute>
+                  <rng:data type="nonNegativeInteger" />
+               </rng:element>
+            </rng:optional>
+         </rng:element>
+      </rng:optional>
    </rng:define>
 
    <!-- files and grouping -->
