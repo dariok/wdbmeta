@@ -54,10 +54,7 @@
                </rng:data>
             </rng:attribute>
             <rng:oneOrMore>
-               <rng:choice>
-                  <rng:ref name="nonEmptyString"/>
-                  <rng:ref name="htmlLikeContent" />
-               </rng:choice>
+               <rng:ref name="htmlLikeContent" />
             </rng:oneOrMore>
          </rng:element>
       </rng:oneOrMore>
@@ -583,7 +580,7 @@
             <rng:text/>
          </rng:element>
          <rng:ref name="imageElement" />
-         <rng:text/>
+         <rng:ref name="nonEmptyString" />
       </rng:choice>
    </rng:define>
    
