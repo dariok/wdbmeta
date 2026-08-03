@@ -53,7 +53,12 @@
                   </a:documentation>
                </rng:data>
             </rng:attribute>
-            <rng:ref name="nonEmptyString"/>
+            <rng:oneOrMore>
+               <rng:choice>
+                  <rng:ref name="nonEmptyString"/>
+                  <rng:ref name="htmlLikeContent" />
+               </rng:choice>
+            </rng:oneOrMore>
          </rng:element>
       </rng:oneOrMore>
       <rng:optional>
