@@ -1,7 +1,9 @@
 <rng:grammar xmlns:rng="http://relaxng.org/ns/structure/1.0"
    xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
    xmlns:wdbmeta="https://github.com/dariok/wdbplus/wdbmeta" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
-   xmlns:meta="https://github.com/dariok/wdbplus/wdbmeta" ns="https://github.com/dariok/wdbplus/wdbmeta"
+   xmlns:meta="https://github.com/dariok/wdbplus/wdbmeta"
+   xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+   ns="https://github.com/dariok/wdbplus/wdbmeta"
    datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
 
    <rng:start combine="choice">
@@ -47,15 +49,14 @@
       <rng:oneOrMore>
          <rng:element name="title">
             <a:documentation> Contains the title(s) of the project. </a:documentation>
+            <sch:assert test="normalize-space() != ''">Title must not be empty</sch:assert>
             <rng:attribute name="type">
                <rng:data type="string">
                   <a:documentation> May be used to give the type of the title. Suggested values are 'main' and 'sub'.
                   </a:documentation>
                </rng:data>
             </rng:attribute>
-            <rng:oneOrMore>
-               <rng:ref name="htmlLikeContent" />
-            </rng:oneOrMore>
+            <rng:ref name="htmlLikeContent" />
          </rng:element>
       </rng:oneOrMore>
       <rng:optional>
@@ -466,9 +467,7 @@
             <rng:optional>
                <rng:attribute name="style"/>
             </rng:optional>
-            <rng:oneOrMore>
-               <rng:ref name="htmlLikeContent"/>
-            </rng:oneOrMore>
+            <rng:ref name="htmlLikeContent"/>
          </rng:element>
       </rng:choice>
       <rng:optional>
@@ -534,9 +533,7 @@
       <a:documentation>A prose paragraph in a description</a:documentation>
       <rng:element name="p">
          <rng:ref name="htmlLikeAttributes"/>
-         <rng:oneOrMore>
-            <rng:ref name="htmlLikeContent"/>
-         </rng:oneOrMore>
+         <rng:ref name="htmlLikeContent"/>
       </rng:element>
    </rng:define>
   
@@ -550,38 +547,40 @@
    </rng:define>
 
    <rng:define name="htmlLikeContent">
-      <rng:choice>
-         <rng:element name="i">
-            <a:documentation>Italic text in a label</a:documentation>
-            <rng:text/>
-         </rng:element>
-         <rng:element name="b">
-            <a:documentation>Bold text in a label</a:documentation>
-            <rng:text/>
-         </rng:element>
-         <rng:element name="u">
-            <a:documentation>Underlined text in a label</a:documentation>
-            <rng:text/>
-         </rng:element>
-         <rng:element name="span">
-            <a:documentation>Equivalent to an HTML span</a:documentation>
-            <rng:attribute name="style"/>
-            <rng:text/>
-         </rng:element>
-         <rng:element name="br">
-            <a:documentation>Equivalent to an HTML br</a:documentation>
-            <rng:empty/>
-         </rng:element>
-         <rng:element name="a">
-            <a:documentation>Equivalent to an HTML a</a:documentation>
-            <rng:attribute name="href">
-               <rng:data type="anyURI"/>
-            </rng:attribute>
-            <rng:text/>
-         </rng:element>
-         <rng:ref name="imageElement" />
-         <rng:ref name="nonEmptyString" />
-      </rng:choice>
+      <rng:oneOrMore>
+         <rng:choice>
+            <rng:element name="i">
+               <a:documentation>Italic text in a label</a:documentation>
+               <rng:ref name="nonEmptyString" />
+            </rng:element>
+            <rng:element name="b">
+               <a:documentation>Bold text in a label</a:documentation>
+               <rng:ref name="nonEmptyString" />
+            </rng:element>
+            <rng:element name="u">
+               <a:documentation>Underlined text in a label</a:documentation>
+               <rng:ref name="nonEmptyString" />
+            </rng:element>
+            <rng:element name="span">
+               <a:documentation>Equivalent to an HTML span</a:documentation>
+               <rng:attribute name="style"/>
+               <rng:ref name="nonEmptyString" />
+            </rng:element>
+            <rng:element name="br">
+               <a:documentation>Equivalent to an HTML br</a:documentation>
+               <rng:empty/>
+            </rng:element>
+            <rng:element name="a">
+               <a:documentation>Equivalent to an HTML a</a:documentation>
+               <rng:attribute name="href">
+                  <rng:data type="anyURI"/>
+               </rng:attribute>
+               <rng:ref name="nonEmptyString" />
+            </rng:element>
+            <rng:ref name="imageElement" />
+            <rng:text />
+         </rng:choice>
+      </rng:oneOrMore>
    </rng:define>
    
    <rng:define name="imageElement">
