@@ -142,14 +142,7 @@
          <rng:element name="coverImages">
             <a:documentation>Contains a list of 1+ images to use on a cover page</a:documentation>
             <rng:oneOrMore>
-               <rng:element name="image">
-                  <a:documentation>Contains exactly one image</a:documentation>
-                  <rng:attribute name="href">
-                     <rng:data type="anyURI">
-                        <a:documentation>Contains the URL for this Image</a:documentation>
-                     </rng:data>
-                  </rng:attribute>
-               </rng:element>
+               <rng:ref name="imageElement" />
             </rng:oneOrMore>
          </rng:element>
       </rng:optional>
@@ -584,15 +577,21 @@
             </rng:attribute>
             <rng:text/>
          </rng:element>
-         <rng:element name="img">
-            <a:documentation>Equivalent to an HTML img</a:documentation>
-            <rng:attribute name="src">
-               <rng:data type="anyURI"/>
-            </rng:attribute>
-            <rng:attribute name="title"/>
-         </rng:element>
+         <rng:ref name="imageElement" />
          <rng:text/>
       </rng:choice>
+   </rng:define>
+   
+   <rng:define name="imageElement">
+      <rng:element name="image">
+         <a:documentation>Equivalent to an HTML img. Contains exactly one image</a:documentation>
+         <rng:attribute name="href">
+            <rng:data type="anyURI">
+               <a:documentation>Contains the URL for this Image</a:documentation>
+            </rng:data>
+         </rng:attribute>
+         <rng:attribute name="title"/>
+      </rng:element>
    </rng:define>
 
    <rng:define name="nonEmptyString">
